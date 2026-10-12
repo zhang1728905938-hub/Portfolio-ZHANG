@@ -1,0 +1,23 @@
+/* Match the other page margins while displaying each complete 16:9 frame. */
+.resume-page {
+  --about-video-control-inset: clamp(18px, 2vw, 32px);
+  position: relative;
+  isolation: isolate;
+  width: var(--content-width);
+  margin-inline: auto;
+  min-height: calc(100svh - var(--footer));
+  padding-block: calc(var(--header) + 20px) 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fff;
+}
+[data-theme='dark'] .resume-page { background: #0a0a0a; }
+
+@media (max-width: 680px) {
+  .resume-page {
+    min-height: 0;
+    padding-block: calc(var(--header) + 12px) 24px;
+    justify-content: flex-start;
+  }
+}

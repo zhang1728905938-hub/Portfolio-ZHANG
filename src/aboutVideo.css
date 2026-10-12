@@ -1,0 +1,101 @@
+.about-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+  z-index: 0;
+  overflow: hidden;
+  border-radius: var(--surface-radius);
+  pointer-events: none;
+}
+
+.about-video__media,
+.about-video__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.about-video__media {
+  background: var(--about-video-poster) center / contain no-repeat;
+}
+
+.about-video__layer {
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+/* These two clips differ from the desktop frame's 16:9 ratio. Crop their
+   edges inside the existing overflow mask instead of exposing the poster. */
+.about-video__layer[src$="/about-07.mp4"],
+.about-video__layer[src$="/about-08.mp4"] {
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-video__layer.is-current {
+  z-index: 2;
+  opacity: 1;
+}
+
+.about-video__layer.is-previous {
+  z-index: 1;
+  opacity: 1;
+  transition: none;
+}
+
+.about-video__controls {
+  position: absolute;
+  left: var(--about-video-control-inset, clamp(24px, 4vw, 64px));
+  bottom: 26px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-shadow: 0 1px 6px rgb(0 0 0 / 24%);
+  pointer-events: auto;
+}
+
+.about-video__toggle {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 32%);
+  border-radius: 50%;
+  background: rgb(20 20 20 / 20%);
+  color: inherit;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+
+.about-video__toggle:hover { background: rgb(20 20 20 / 40%); }
+.about-video__toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+
+.about-video__count {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  font-variant-numeric: tabular-nums;
+}
+
+.about-video__count span { opacity: .65; }
+
+@media (max-width: 600px) {
+  .about-video__controls { bottom: 18px; }
+}
+
+/* A taller crop fills the phone screen without stretching the source video. */
+@media (max-width: 680px) and (orientation: portrait) {
+  .about-video { aspect-ratio: 4 / 5; }
+  .about-video__media { background-size: cover; }
+  .about-video__layer { object-fit: cover; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-video__layer { transition: none; }
+}

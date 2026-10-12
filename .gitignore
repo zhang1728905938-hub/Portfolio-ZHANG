@@ -1,0 +1,22 @@
+node_modules/
+dist/
+release/
+.DS_Store
+*.log
+.preview-*.png
+
+# Local previews, service credentials, and generated deployment state.
+.preview/
+.vercel/
+.env
+.env.*
+!.env.example
+supabase/.temp/
+
+# Original authoring sources; the website-ready media lives in public/.
+/ACADEMIC PROJECT/
+/AIGC &MODELLING/
+/OTHER WORK/
+/VIDEO/
+/WORK PROJECT/
+/素材/

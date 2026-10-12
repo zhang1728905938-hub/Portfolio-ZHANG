@@ -1,0 +1,19 @@
+/* Reduce the previous side margins by another 10% (1.1 × 1.1 × 0.9 × 0.9). */
+:root { --content-width: min(calc(1078.11px + 1.99%), calc(100% - 62.7264px)); --surface-radius: 11px; }
+.site-header { width: var(--content-width); }
+.page-inner,
+.footer-inner {
+  width: var(--content-width);
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (max-width: 900px) {
+  :root { --content-width: calc(100% - 43.1244px); }
+}
+@media (max-width: 680px) {
+  :root { --content-width: calc(100% - 31.3632px); }
+  .footer-inner .copyright { left: 0; }
+}

@@ -1,0 +1,144 @@
+/* Contact opens as a fixed page, then rejoins the document for native return scrolling. */
+html {
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  scrollbar-gutter: stable;
+  overflow-x: clip;
+}
+
+body {
+  overflow: visible;
+}
+
+html:has(dialog[open]),
+body:has(dialog[open]),
+html:has(.hybrid-page.is-contact-view),
+body:has(.hybrid-page.is-contact-view) {
+  overflow: hidden;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+.hybrid-page {
+  overflow-anchor: none;
+}
+
+.hybrid-page.is-contact-flow {
+  padding-bottom: var(--footer);
+}
+
+.continuous-page {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding-top: 0;
+  padding-bottom: calc(var(--footer) + 24px);
+  overflow: visible;
+}
+
+/* Leave room to finish browsing Other Works before the Contact boundary.
+   Keep this space in both directions so native return scrolling stays stable. */
+@media (min-width: 761px) {
+  .continuous-page {
+    padding-bottom: calc(var(--footer) + 24px + clamp(180px, 25svh, 300px));
+  }
+}
+
+.continuous-page > .page-section {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+  transform: none;
+  scroll-snap-align: none;
+  scroll-margin-top: calc(var(--header) + 12px);
+}
+
+.continuous-page > .page-section > .page-inner {
+  height: auto;
+  min-height: 0;
+}
+
+.continuous-page .work-category {
+  scroll-margin-top: calc(var(--header) + 12px);
+}
+
+.hybrid-page.is-contact-view > .continuous-page {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hybrid-page > .contact-page {
+  position: fixed;
+  top: var(--header);
+  bottom: var(--footer);
+  left: 0;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hybrid-page.is-contact-view > .contact-page {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.hybrid-page.is-contact-flow > .contact-page {
+  position: relative;
+  top: auto;
+  bottom: auto;
+  height: max(460px, calc(100dvh - var(--header) - var(--footer)));
+  scroll-margin-top: var(--header);
+  overflow: visible;
+  overscroll-behavior-y: auto;
+  overflow-anchor: none;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.contact-page .spatial-contact {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 460px;
+  overflow: visible;
+}
+
+/* Keep a measurable scene while the page is hidden so its archive targets
+   have exactly the same geometry before and after the transition. */
+.contact-page .spatial-ring-scene {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+}
+
+.contact-page .contact-reach {
+  margin-top: 0;
+  transform: translateY(-44px);
+}
+
+@media (max-width: 760px) {
+  .continuous-page {
+    padding-bottom: calc(var(--footer) + 20px);
+  }
+
+  .contact-page .spatial-contact {
+    min-height: 480px;
+  }
+
+  .hybrid-page.is-contact-flow > .contact-page {
+    height: max(480px, calc(100dvh - var(--header) - var(--footer)));
+  }
+
+  .contact-page .contact-reach {
+    transform: translateY(calc(clamp(-112px, -12svh, -56px) - 8px));
+  }
+}
