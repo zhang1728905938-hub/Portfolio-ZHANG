@@ -1,0 +1,140 @@
+/* Small 16:9 photographs on a broad radial ring, viewed from above. */
+.spatial-contact { overflow: visible; }
+.ring-top-space { flex: 0 0 20px; }
+.spatial-ring-scene { position: relative; flex: 1; min-height: 0; }
+.contact-reach {
+  position: relative;
+  flex: 0 0 auto;
+  min-height: 102px;
+  margin-bottom: clamp(20px, 3vh, 30px);
+  padding: 8px 0 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  color: var(--ink);
+  transform: translateY(-24px);
+}
+.contact-reach h2 {
+  margin: 0;
+  font-family: 'Manrope', Arial, sans-serif;
+  font-size: 23px;
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: -.7px;
+}
+.contact-reach-links {
+  display: grid;
+  justify-items: center;
+  gap: 9px;
+  width: 100%;
+  max-width: 100%;
+}
+.contact-reach-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: calc(100% - 42px);
+  color: var(--muted);
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 450;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-decoration: none;
+  text-align: center;
+}
+.contact-reach-item svg {
+  flex: 0 0 13px;
+  width: 13px;
+  height: 13px;
+  stroke-width: 1.4;
+}
+.contact-reach-text { min-width: 0; overflow-wrap: anywhere; }
+.contact-reach-value { font-size: 12px; letter-spacing: inherit; }
+a.contact-reach-item { transition: color .2s ease; }
+a.contact-reach-item:hover { color: var(--ink); }
+a.contact-reach-item:focus-visible { outline: 1px solid currentColor; outline-offset: 5px; border-radius: 2px; }
+.spatial-ring {
+  position: absolute;
+  inset: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.spatial-ring-item {
+  position: absolute;
+  left: 50%;
+  top: var(--ring-origin, 42%);
+  width: var(--ring-card-width, 120px);
+  height: var(--ring-card-height, 67.5px);
+  margin-left: calc(var(--ring-card-width, 120px) / -2);
+  margin-top: calc(var(--ring-card-height, 67.5px) / -2);
+  transform-style: preserve-3d;
+  perspective: var(--card-perspective, 1400px);
+  perspective-origin: calc(50% + var(--card-camera-x, 0px)) calc(50% + var(--card-camera-y, 0px));
+  z-index: var(--card-depth, 0);
+  pointer-events: none;
+}
+.spatial-ring-item:has(.hovered) { z-index: 2000; }
+.spatial-ring .orbit-card {
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 2px;
+  background: #fff;
+  backface-visibility: visible;
+  pointer-events: auto;
+  transform-origin: center;
+  transform: rotateX(var(--card-pitch, -27deg)) rotateY(var(--card-yaw, 0deg)) scale(.98);
+  opacity: var(--card-opacity, 1);
+  transition: transform .9s cubic-bezier(.22, .7, .18, 1), opacity .5s ease, box-shadow .9s ease;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, .055);
+}
+.spatial-ring .orbit-card img {
+  transform: scaleX(var(--card-flip, 1));
+  border-radius: 1px;
+}
+.spatial-ring .orbit-card.hovered {
+  transform: rotateX(0deg) rotateY(var(--card-facing, 0deg)) scale(1.7568);
+  opacity: 1;
+  box-shadow: 0 16px 38px rgba(0, 0, 0, .12);
+}
+.spatial-ring .orbit-card > span {
+  left: 0;
+  right: 0;
+  bottom: -29px;
+  padding: 8px;
+  font-size: 9px;
+  transform: scaleX(var(--card-flip, 1));
+  pointer-events: none;
+}
+.spatial-ring .orbit-card:focus-visible { outline: 1px solid #888; outline-offset: 4px; }
+.orbit-card-title, .contact-bottom > span {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.orbit-card-title { text-align: left; }
+.spatial-ring .orbit-card > span > svg, .orbit-toggle { flex-shrink: 0; }
+@media (max-height: 820px) and (min-width: 761px) {
+  .ring-top-space { flex-basis: 16px; }
+}
+@media (max-width: 760px) {
+  .ring-top-space { flex-basis: 18px; }
+  .contact-reach {
+    min-height: 96px;
+    padding: 8px 0 10px;
+    margin-bottom: 24px;
+    transform: translateY(clamp(-112px, -12svh, -56px));
+  }
+  .contact-reach h2 { font-size: 20px; }
+  .contact-reach-item { font-size: 9px; }
+  .contact-reach-value { font-size: 10px; }
+  .spatial-ring .orbit-card.hovered { transform: rotateX(0deg) rotateY(var(--card-facing, 0deg)) scale(1.6992); }
+  .spatial-ring .orbit-card > span { font-size: 7px; padding: 6px; bottom: -25px; }
+}

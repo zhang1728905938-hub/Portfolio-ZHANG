@@ -1,0 +1,48 @@
+RUI ZHANG PORTFOLIO — 静态网页发布包
+
+一、发布文件
+website/index.html 是网页入口。
+website/assets/ 包含编译后的 JavaScript 和 CSS。
+website/images/ 包含当前作品的封面、预览图和原图。
+website/videos/ 包含首页的 7 段视频和海报。
+website/fonts/ 包含本地字体及许可证。
+
+同一套 HTML 文件会根据屏幕宽度自动适配电脑、平板和手机。
+已保留作品详情、原图查看、视频轮播、黑白主题、联系圆环和滚动交互。
+图片、视频、字体随包附带，运行时不依赖本机源文件或 Supabase。
+发布文件中不包含 node_modules、源素材文件夹、账号密钥或本地诊断文件。
+
+二、发布到网页服务器
+将 website 文件夹中的全部内容上传到静态网站的发布目录。
+入口文件为 index.html，保留 assets、images、videos、fonts 的相对目录结构。
+文件已完成编译；这个发布目录无需再次安装依赖或执行构建命令。
+可发布在域名根目录，也可发布在 /Portfolio-ZHANG/ 等子目录。
+子目录访问地址应以 / 结尾，例如 https://example.com/Portfolio-ZHANG/。
+服务器应正确返回 HTML、CSS、JavaScript、图片、字体和 MP4 的 MIME 类型；
+MP4 建议支持 HTTP Range（分段请求），以正常缓冲和播放视频。
+
+三、电脑本地预览
+Windows：双击本地预览.cmd，打开命令窗口中打印的本机地址。
+其他系统：安装 Node.js 20 或更新版本，在本文件夹运行：
+node preview-server.mjs --host 0.0.0.0 --port 4173
+然后在浏览器打开 http://localhost:4173/。
+本地预览使用内置静态服务器，无需安装 npm 依赖。
+保持命令窗口打开，Ctrl+C 可停止服务。
+请通过 http 地址预览；直接双击 index.html 的 file:// 模式会被浏览器限制模块脚本。
+
+四、手机本地预览
+电脑和手机连接同一个 Wi-Fi。
+启动本地预览后，命令窗口会列出局域网地址，例如 http://192.168.x.x:4173/。
+用手机浏览器访问该地址，手机不能使用电脑的 localhost 地址。
+若系统询问防火墙访问，请允许在私人网络访问；无需关闭防火墙。
+发布后，电脑与手机都直接打开正式网站链接即可。
+
+五、文件校验
+release-manifest.json 记录网站文件清单、大小和 SHA256，可用于校验传输完整性。
+ZIP 压缩包应完整解压后使用。图片和视频保留现有品质，因此压缩包体积较大。
+本次只生成发布文件，并未上传到 GitHub、Vercel、Supabase 或正式域名。
+
+六、继续修改网站
+网页源代码仍保存在原作品集项目中。
+修改完成后，在原项目安装依赖并运行 npm run package:web，可生成新的发布包。
+此压缩包用于发布和浏览；建议在原项目中进行后续内容或样式编辑。
